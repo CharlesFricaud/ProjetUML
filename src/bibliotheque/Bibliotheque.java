@@ -15,6 +15,7 @@ public class Bibliotheque {
     private Integer prochainNumLecteur = 1;
     private HashMap<Integer, Lecteur> _dicoLecteur;
     private HashMap<String, Ouvrage> dicoOuvrage;
+    private HashMap<Integer, Integer> dicoEmprunts;
 
     /*
 		 * Le dictionnaire de lecteur permet à bibliotheque de 
@@ -26,6 +27,7 @@ public class Bibliotheque {
     public Bibliotheque() {
         this.creerLecteurs(new HashMap<>());
         this.creerOuvrages(new HashMap<>());
+        this.creerEmprunts(new HashMap<>());
     }
 
 // -----------------------------------------------
@@ -162,7 +164,7 @@ ________________________________________________________________________________
             while (dateParution.after(dateActuelle)) {
                 dateParution = EntreesSorties.lireDate("Date incorrecte, entrez la date de parution de l'ouvrage : (antérieure à la date d'aujourd'hui) : ");
             }
-            
+
             String nomsAuteurs = EntreesSorties.lireChaine("Entrez le(s) nom(s) de(s) auteur(s) : ");
             Integer sCible = 0;
             CibleOuvrage cible = CibleOuvrage.adefinir;
@@ -249,9 +251,9 @@ ________________________________________________________________________________
             } else {
                 statutEmprunt = false;
             }
-            
+
             O.ajouterExemplaire(dateReception, nouvNb, statutEmprunt);
-            
+
             EntreesSorties.afficherMessage("Exemplaires créés.");
         } else {
             EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
@@ -275,16 +277,24 @@ ________________________________________________________________________________
 
         }
     }
+
+    /*______________________________________________________________________________________________________________________________________________________________
+-----------------------------------------------------------------          Emprunts             ----------------------------------------------------------------
+______________________________________________________________________________________________________________________________________________________________*/
+     public void emprunterExemplaire() {
+         
+     }
+    
+     public void rendreExemplaire() {
+         
+     }
+     
+     public void relancerLecteur(){
+         
+     }
+    
+    public void creerEmprunts(HashMap<Integer, Integer> _dicoEmprunts) {
+        dicoEmprunts = _dicoEmprunts;
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
