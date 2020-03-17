@@ -144,6 +144,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouvel exemplaire : 1                                  |");
             EntreesSorties.afficherMessage("| Consulter les exemplaires d'un ouvrage : 2             |");
+            EntreesSorties.afficherMessage("| Consulter tous les  exemplaires : 3                    |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuLect = EntreesSorties.lireEntier();
@@ -158,6 +159,12 @@ public class MenuBiblio {
                 case 2: {
                     DonneesUtilitaire.loadDB(_bibliotheque);
                     _bibliotheque.consulterExemplairesOuvrage();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }
+                case 3: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.consulterExemplaires();
                     DonneesUtilitaire.updateDB(_bibliotheque);
                     break;
                 }
