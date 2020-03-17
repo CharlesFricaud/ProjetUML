@@ -21,6 +21,7 @@ public class Exemplaire extends Ouvrage implements Serializable{
     private int numExemplaire;
     private boolean statutEmprunt;
     private String isbn;
+    private EtatEmprunt etat;
 
     // -----------------------------------------------
     //Constructeur
@@ -29,7 +30,8 @@ public class Exemplaire extends Ouvrage implements Serializable{
         this.dateReception = dateReception;    
         this.numExemplaire = numExemplaire;
         this.statutEmprunt = statutEmprunt;
-        this.isbn = ouvrage.getIsbn();        
+        this.isbn = ouvrage.getIsbn();       
+        this.etat = EtatEmprunt.disponible;
     }
     
     public Integer getNumExemplaire() {
@@ -49,5 +51,18 @@ public class Exemplaire extends Ouvrage implements Serializable{
         System.out.println("Numero d'exemplaire : "+ this.getNumExemplaire());
         System.out.println("Statut d'emprunt de cet exemplaire : " + this.getStatutEmprunt()+" (true = empruntable | false = seulement consultable)");
         EntreesSorties.afficherMessage("");
-    }   
+    }
+    
+    public boolean isDisponible(){
+        if(etat == EtatEmprunt.disponible){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public void setEtat(EtatEmprunt etat){
+        this.etat = etat;
+    }
 }
