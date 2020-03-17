@@ -320,9 +320,8 @@ ________________________________________________________________________________
         CibleOuvrage cl = L.isLecteurOK();
 
         if (!cibleOK(co, cl)) {
-           EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage."); 
-        }
-        else{
+            EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage.");
+        } else {
             Emprunt e = new Emprunt(numLecteur, numExemplaire, isbn);
             dicoEmprunts.add(e);
             L.setNbEmprunt();
@@ -334,13 +333,29 @@ ________________________________________________________________________________
     public boolean cibleOK(CibleOuvrage co, CibleOuvrage cl) {
         if (cl == CibleOuvrage.enfant && (co == CibleOuvrage.adolescent || co == CibleOuvrage.adulte)) {
             return false;
-        }
-        else if(cl == CibleOuvrage.adolescent && co == CibleOuvrage.adulte){
+        } else if (cl == CibleOuvrage.adolescent && co == CibleOuvrage.adulte) {
             return false;
-        }
-        else
-        {
+        } else {
             return true;
+        }
+    }
+
+    public void consulterEmprunts() {
+        for (Emprunt emprunt : dicoEmprunts) {
+            emprunt.afficherEmprunt();
+        }
+    }
+
+    public void consulterEmpruntsLecteur(Integer numLecteur) {
+        Lecteur L = getLecteur(numLecteur);
+        if (L == null) {
+            EntreesSorties.afficherMessage("Ce lecteur n'existe pas.");
+        } else {
+            for (Emprunt emprunt : dicoEmprunts) {
+                if (emprunt.getEmprunteur() == numLecteur) {
+                    emprunt.afficherEmprunt();
+                }
+            }
         }
     }
 
@@ -355,5 +370,5 @@ ________________________________________________________________________________
     public void creerEmprunts(ArrayList<Emprunt> _dicoEmprunts) {
         dicoEmprunts = _dicoEmprunts;
     }
-    
+
 }
