@@ -19,6 +19,7 @@ public class Lecteur implements Serializable {
     private GregorianCalendar dateNaissance;
     private String adresse;
     private String numTel;
+    private Integer nbEmprunt;
 
     // -----------------------------------------------
     //Constructeur
@@ -30,6 +31,7 @@ public class Lecteur implements Serializable {
         this.setDateNaissance(dateNaissance);
         this.setAdresse(adresse);
         this.setNumTel(numTel);
+        this.nbEmprunt = 0;
     }
 
 // -----------------------------------------------
@@ -106,7 +108,21 @@ public class Lecteur implements Serializable {
         }
         return age;
     }
-
+    
+    public boolean isLecteurSature(){
+        if(this.nbEmprunt>4){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public CibleOuvrage isLecteurOK(){
+        return this.getCible();
+    }
+    
+    
 // -----------------------------------------------
     // Private
 // -----------------------------------------------
@@ -135,6 +151,10 @@ public class Lecteur implements Serializable {
 
     private void setNumTel(String numTel) {
         this.numTel = numTel;
+    }
+    
+    public void setNbEmprunt(){
+        this.nbEmprunt++;
     }
 
 }
