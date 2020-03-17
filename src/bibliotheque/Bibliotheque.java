@@ -329,8 +329,7 @@ ________________________________________________________________________________
             E.setEtat(EtatEmprunt.en_cours);
             
         }
-
-        
+        EntreesSorties.afficherMessage("L'emprunt a été créé.");
     }
 
     public boolean cibleOK(CibleOuvrage co, CibleOuvrage cl) {
