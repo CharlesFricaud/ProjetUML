@@ -10,6 +10,7 @@ package bibliotheque;
  * @author fricaudc
  */
 public enum EtatEmprunt{
+    disponible,
     en_cours,
     en_retard,
     a_relancer,
