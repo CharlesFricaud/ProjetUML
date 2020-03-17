@@ -78,7 +78,11 @@ public class Ouvrage implements Serializable {
         return cible;
     }
 
-    private void getExemplaires(String isbn) {
+    public Exemplaire getExemplaire(Integer numExemplaire) {
+        return exemplaires.get(numExemplaire);
+    }    
+    
+    public void getExemplaires(String isbn) {
         afficherReduit();
         exemplaires.forEach((key, value) -> value.afficherExemplaire());
     }
