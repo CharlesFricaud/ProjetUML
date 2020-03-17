@@ -15,7 +15,7 @@ public class Bibliotheque {
     private Integer prochainNumLecteur = 1;
     private HashMap<Integer, Lecteur> _dicoLecteur;
     private HashMap<String, Ouvrage> dicoOuvrage;
-    private HashMap<Integer, Integer> dicoEmprunts;
+    private ArrayList<Emprunt> dicoEmprunts;
 
     /*
 		 * Le dictionnaire de lecteur permet à bibliotheque de 
@@ -27,7 +27,7 @@ public class Bibliotheque {
     public Bibliotheque() {
         this.creerLecteurs(new HashMap<>());
         this.creerOuvrages(new HashMap<>());
-        this.creerEmprunts(new HashMap<>());
+        this.creerEmprunts(new ArrayList());
     }
 
 // -----------------------------------------------
@@ -278,23 +278,84 @@ ________________________________________________________________________________
         }
     }
 
+    public void consulterExemplaires() {
+        for (Map.Entry<String, Ouvrage> o : dicoOuvrage.entrySet()) {
+            String isbn = o.getKey();
+            o.getValue().getExemplaires(isbn);
+        }
+    }
+
     /*______________________________________________________________________________________________________________________________________________________________
 -----------------------------------------------------------------          Emprunts             ----------------------------------------------------------------
 ______________________________________________________________________________________________________________________________________________________________*/
-     public void emprunterExemplaire() {
-         
-     }
-    
-     public void rendreExemplaire() {
-         
-     }
-     
-     public void relancerLecteur(){
-         
-     }
-    
-    public void creerEmprunts(HashMap<Integer, Integer> _dicoEmprunts) {
-        dicoEmprunts = _dicoEmprunts;
+    public void emprunterExemplaire() {
+
+        int numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur souhaitant emprunter un exemplaire :");
+        Lecteur L = getLecteur(numLecteur);
+        if (L == null) {
+            EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
+        }
+
+        String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage à emprunter: ");
+        Ouvrage O = getOuvrage(isbn);
+        if (O == null) {
+            EntreesSorties.afficherMessage("Ouvrage non présent dans le système.");
+        }
+
+        int numExemplaire = EntreesSorties.lireEntier("Entrez le numero de l'exemplaire à emprunter ");
+        Exemplaire E = O.getExemplaire(numExemplaire);
+        if (E == null) {
+            EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
+        }
+
+        if (!E.isDisponible()) {
+            EntreesSorties.afficherMessage("Cet exemplaire est déjà en cours d'emprunt.");
+        }
+
+        CibleOuvrage co = O.getCible();
+        if (L.isLecteurSature() == true) {
+            EntreesSorties.afficherMessage("Ce lecteur a effectué tous ses emprunts possibles.");
+        }
+
+        CibleOuvrage cl = L.isLecteurOK();
+
+        if (!cibleOK(co, cl)) {
+           EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage."); 
+        }
+        else{
+            Emprunt e = new Emprunt(numLecteur, numExemplaire, isbn);
+            dicoEmprunts.add(e);
+            L.setNbEmprunt();
+            E.setEtat(EtatEmprunt.en_cours);
+            
+        }
+
+        
     }
 
+    public boolean cibleOK(CibleOuvrage co, CibleOuvrage cl) {
+        if (cl == CibleOuvrage.enfant && (co == CibleOuvrage.adolescent || co == CibleOuvrage.adulte)) {
+            return false;
+        }
+        else if(cl == CibleOuvrage.adolescent && co == CibleOuvrage.adulte){
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public void rendreExemplaire() {
+
+    }
+
+    public void relancerLecteur() {
+
+    }
+
+    public void creerEmprunts(ArrayList<Emprunt> _dicoEmprunts) {
+        dicoEmprunts = _dicoEmprunts;
+    }
+    
 }
