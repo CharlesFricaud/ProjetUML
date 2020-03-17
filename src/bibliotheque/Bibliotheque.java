@@ -327,7 +327,6 @@ ________________________________________________________________________________
             dicoEmprunts.add(e);
             L.setNbEmprunt();
             E.setEtat(EtatEmprunt.en_cours);
-            
         }
         EntreesSorties.afficherMessage("L'emprunt a été créé.");
     }
