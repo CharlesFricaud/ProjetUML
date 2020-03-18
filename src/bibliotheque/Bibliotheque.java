@@ -365,7 +365,8 @@ ________________________________________________________________________________
                 if (emprunt.getNumLecteur() == numLecteur) {
                     String isbn = emprunt.getIsbn();
                     Ouvrage o = getOuvrage(isbn);
-                    dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
+                    GregorianCalendar DateAct = new GregorianCalendar();
+                    dureeEmprunt = DateAct.get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK);
                     if (dureeEmprunt >= 15) {
                         emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
                     }
@@ -397,7 +398,7 @@ ________________________________________________________________________________
                     Emprunt e = null;
                     for (int i = 0; i < dicoEmprunts.size(); i++) {
                         Emprunt ec = dicoEmprunts.get(i);
-                        if ((int) ec.getNumExemplaire() == (int) numExemplaire && (ec.getIsbn().equals(isbn))==true){
+                        if ((int)ec.getNumLecteur() == (int) numLecteur && (int) ec.getNumExemplaire() == (int) numExemplaire && (ec.getIsbn().equals(isbn))==true){
                             e = ec;
                         }
                     }

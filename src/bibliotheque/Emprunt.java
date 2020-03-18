@@ -71,7 +71,7 @@ public class Emprunt implements Serializable {
     // -----------------------------------------------    
     
     public void afficherEmprunt() {
-        System.out.println("Numero d'emprunteur : " + this.getNumLecteur());
+        System.out.println("Numero de l'emprunteur : " + this.getNumLecteur());
         System.out.println("Isbn de l'ouvrage emprunté : " + this.getIsbn());
         System.out.println("Numero de l'exemplaire emprunté : " + this.getNumExemplaire());
         String dateEm = EntreesSorties.ecrireDate(this.dateEmprunt);
@@ -85,4 +85,6 @@ public class Emprunt implements Serializable {
     public void setEtatEmprunt(EtatEmprunt etat){
         this.etat = etat;
     }
+    
+
 }
