@@ -31,7 +31,7 @@ public class Exemplaire extends Ouvrage implements Serializable{
         this.numExemplaire = numExemplaire;
         this.statutEmprunt = statutEmprunt;
         this.isbn = ouvrage.getIsbn();       
-        this.etat = EtatEmprunt.disponible;
+        this.etat = EtatEmprunt.non_emprunte;
     }
     
     public Integer getNumExemplaire() {
@@ -59,7 +59,7 @@ public class Exemplaire extends Ouvrage implements Serializable{
     }
     
     public boolean isDisponible(){
-        if(etat == EtatEmprunt.disponible && this.statutEmprunt == true){
+        if(etat == EtatEmprunt.non_emprunte && this.statutEmprunt == true){
             return true;
         }
         else {

@@ -74,8 +74,10 @@ public class Emprunt implements Serializable {
         System.out.println("Numero d'emprunteur : " + this.getEmprunteur());
         System.out.println("Isbn de l'ouvrage emprunté : " + this.getIsbn());
         System.out.println("Numero de l'exemplaire emprunté : " + this.getNumExemplaire());
-        System.out.println("Date d'emprunt : "+this.getDateEmprunt());
-        System.out.println("Date de retour  : " + this.getDateRetour());
+        String dateEm = EntreesSorties.ecrireDate(this.dateEmprunt);
+        System.out.println("Date d'emprunt :" + dateEm);        
+        String dateR = EntreesSorties.ecrireDate(this.dateRetour);
+        System.out.println("Date de retour prévue : " + dateR);
         System.out.println("Etat de l'emprunt  : " + this.getEtatEmprunt());        
         EntreesSorties.afficherMessage("");
     }

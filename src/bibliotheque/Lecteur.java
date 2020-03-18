@@ -89,6 +89,7 @@ public class Lecteur implements Serializable {
         System.out.println("Age : " + this.calculAge() + " ans");
         System.out.println("Adresse : " + this.getAdresse());
         System.out.println("Telephone : " + this.getNumTel());
+        System.out.println("Nombre d'emprunts : " + this.nbEmprunt);        
         EntreesSorties.afficherMessage("");
     }
 
@@ -153,12 +154,7 @@ public class Lecteur implements Serializable {
         this.numTel = numTel;
     }
     
-    public void plusNbEmprunt(){
-        this.nbEmprunt++;
+    public void addNbEmprunt(int i){
+        this.nbEmprunt =+ i;
     }
-
-    public void moinsNbEmprunt(){
-        this.nbEmprunt--;
-    }    
-
 }
