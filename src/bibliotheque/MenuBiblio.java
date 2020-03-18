@@ -144,7 +144,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
             EntreesSorties.afficherMessage("| Nouvel exemplaire : 1                                  |");
             EntreesSorties.afficherMessage("| Consulter les exemplaires d'un ouvrage : 2             |");
-            EntreesSorties.afficherMessage("| Consulter tous les  exemplaires : 3                    |");
+            EntreesSorties.afficherMessage("| Consulter tous les exemplaires : 3                     |");
             EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");
             EntreesSorties.afficherMessage(" ========================================================");
             menuLect = EntreesSorties.lireEntier();
@@ -177,6 +177,60 @@ public class MenuBiblio {
             }
         } while (menuLect != 0);
     }
+    
+public void menuEmprunt() {
+        Integer menuLect;
+        do {
+            EntreesSorties.afficherMessage(" ========================================================");
+            EntreesSorties.afficherMessage("| Saisissez un numero correspondant :                    |");
+            EntreesSorties.afficherMessage("| Emprunter un exemplaire : 1                            |");
+            EntreesSorties.afficherMessage("| Rendre un exemplaire : 2                               |");
+            EntreesSorties.afficherMessage("| Consulter tous les emprunts : 3                        |");
+            EntreesSorties.afficherMessage("| Consulter les emprunts d'un lecteur : 4                |");
+            EntreesSorties.afficherMessage("| Consulter les emprunts en retard pour relance : 5      |");            
+            EntreesSorties.afficherMessage(" ========================================================");
+            menuLect = EntreesSorties.lireEntier();
+
+            switch (menuLect) {
+                case 1: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.emprunterExemplaire();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }
+                case 2: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.rendreExemplaire();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }
+                case 3: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.consulterEmprunts();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }
+                case 4: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.consulterEmpruntsLecteur();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }
+                case 5: {
+                    DonneesUtilitaire.loadDB(_bibliotheque);
+                    _bibliotheque.relancerLecteur();
+                    DonneesUtilitaire.updateDB(_bibliotheque);
+                    break;
+                }                   
+                case 0:
+                    break;
+                default: {
+                    System.out.println("Choix non valide");
+                    break;
+                }
+            }
+        } while (menuLect != 0);
+    }    
 }
 
 
