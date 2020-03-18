@@ -346,11 +346,14 @@ ________________________________________________________________________________
         }
     }
 
-    public void consulterEmpruntsLecteur(Integer numLecteur) {
+    public void consulterEmpruntsLecteur() {
+        int numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur souhaitant emprunter un exemplaire : ");
         Lecteur L = getLecteur(numLecteur);
         if (L == null) {
-            EntreesSorties.afficherMessage("Ce lecteur n'existe pas.");
-        } else {
+            EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
+        }
+        else 
+        {
             for (Emprunt emprunt : dicoEmprunts) {
                 if (emprunt.getEmprunteur() == numLecteur) {
                     String isbn = emprunt.getIsbn();
@@ -406,9 +409,9 @@ ________________________________________________________________________________
     }
 
     public void relancerLecteur() {
-        
+        int dureeEmprunt;
         for (Emprunt emprunt : dicoEmprunts) {
-            int dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
+            dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
             if(dureeEmprunt >= 15)
             {
                 emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
