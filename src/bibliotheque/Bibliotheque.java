@@ -306,15 +306,14 @@ ________________________________________________________________________________
                 if (E == null) {
                     EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
                 } else {
-                    if (!E.isDisponible()) {
+                    if (!E.isEmpruntable()) {
                         EntreesSorties.afficherMessage("Cet exemplaire est déjà en cours d'emprunt ou n'est pas empruntable.");
                     } else {
                         CibleOuvrage co = O.getCible();
                         if (L.isLecteurSature() == true) {
                             EntreesSorties.afficherMessage("Ce lecteur a effectué tous ses emprunts possibles.");
                         } else {
-                            CibleOuvrage cl = L.isLecteurOK();
-
+                            CibleOuvrage cl = L.getCible();
                             if (!cibleOK(co, cl)) {
                                 EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage.");
                             } else {
@@ -363,7 +362,7 @@ ________________________________________________________________________________
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
         } else {
             for (Emprunt emprunt : dicoEmprunts) {
-                if (emprunt.getEmprunteur() == numLecteur) {
+                if (emprunt.getNumLecteur() == numLecteur) {
                     String isbn = emprunt.getIsbn();
                     Ouvrage o = getOuvrage(isbn);
                     dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
@@ -378,21 +377,6 @@ ________________________________________________________________________________
             }
         }
     }
-
-//    public Emprunt getEmprunt(Integer numLecteur, Integer numExemplaire, String isbn) {
-//        int index;
-//        Emprunt e = dicoEmprunts.get(indexOf());
-//        for (Emprunt emprunt : dicoEmprunts) {
-//            System.out.println("emprunt :" + emprunt.getEmprunteur() + " " + emprunt.getNumExemplaire() + " " + emprunt.getIsbn());
-//            if (emprunt.getEmprunteur() == numLecteur && emprunt.getNumExemplaire() == numExemplaire && emprunt.getIsbn() == isbn) {
-//                e = emprunt;
-//                System.out.println("e1 :" + e);
-//                break;
-//            }
-//        }
-//        System.out.println("e2 :" + e);
-//        return e;
-//    }
 
     public void rendreExemplaire() {
         int numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur ayant emprunté l'exemplaire à rendre : ");
@@ -417,7 +401,6 @@ ________________________________________________________________________________
                             e = ec;
                         }
                     }
-                    //Emprunt e = getEmprunt(numLecteur, numExemplaire, isbn);
                     if (e == null || (e.getEtatEmprunt() == EtatEmprunt.non_emprunte)) {
                         EntreesSorties.afficherMessage("Cet emprunt n'existe pas.");
                     } else {

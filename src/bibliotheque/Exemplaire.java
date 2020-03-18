@@ -58,7 +58,7 @@ public class Exemplaire extends Ouvrage implements Serializable{
         EntreesSorties.afficherMessage("");
     }
     
-    public boolean isDisponible(){
+    public boolean isEmpruntable(){
         if(etat == EtatEmprunt.non_emprunte && this.statutEmprunt == true){
             return true;
         }

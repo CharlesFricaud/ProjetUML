@@ -119,10 +119,6 @@ public class Lecteur implements Serializable {
         }
     }
     
-    public CibleOuvrage isLecteurOK(){
-        return this.getCible();
-    }
-    
     
 // -----------------------------------------------
     // Private

@@ -21,9 +21,9 @@ public class Emprunt implements Serializable {
     //Attributs
     // -----------------------------------------------
     
-    private Integer emprunteur;
-    private Integer exemplaire;
-    private String isbn_ouvrage;
+    private Integer numLecteur;
+    private Integer numExemplaire;
+    private String isbnOuvrage;
     private GregorianCalendar dateEmprunt;
     private GregorianCalendar dateRetour;
     private EtatEmprunt etat; 
@@ -33,25 +33,25 @@ public class Emprunt implements Serializable {
     // -----------------------------------------------
     
     public Emprunt(Integer numLecteur, Integer numExemplaire, String isbn) {
-        this.emprunteur = numLecteur;
-        this.exemplaire = numExemplaire;
-        this.isbn_ouvrage = isbn;
+        this.numLecteur = numLecteur;
+        this.numExemplaire = numExemplaire;
+        this.isbnOuvrage = isbn;
         this.dateEmprunt = new GregorianCalendar();
         this.dateRetour = (GregorianCalendar) GregorianCalendar.getInstance();
         dateRetour.add((GregorianCalendar.DAY_OF_WEEK),8);
         this.etat = EtatEmprunt.en_cours;   
     }  
     
-    public int getEmprunteur() {
-        return emprunteur;
+    public int getNumLecteur() {
+        return numLecteur;
     }   
     
     public int getNumExemplaire() {
-        return exemplaire;
+        return numExemplaire;
     }
     
     public String getIsbn() {
-        return isbn_ouvrage;
+        return isbnOuvrage;
     }
     
     public GregorianCalendar getDateEmprunt() {
@@ -71,7 +71,7 @@ public class Emprunt implements Serializable {
     // -----------------------------------------------    
     
     public void afficherEmprunt() {
-        System.out.println("Numero d'emprunteur : " + this.getEmprunteur());
+        System.out.println("Numero d'emprunteur : " + this.getNumLecteur());
         System.out.println("Isbn de l'ouvrage emprunté : " + this.getIsbn());
         System.out.println("Numero de l'exemplaire emprunté : " + this.getNumExemplaire());
         String dateEm = EntreesSorties.ecrireDate(this.dateEmprunt);
