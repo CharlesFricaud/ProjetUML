@@ -21,6 +21,7 @@ public class MenuBiblio {
             EntreesSorties.afficherMessage("| Menu Lecteur : 1                                       |");
             EntreesSorties.afficherMessage("| Menu Ouvrage : 2                                       |");
             EntreesSorties.afficherMessage("| Menu Exemplaire : 3                                    |");
+            EntreesSorties.afficherMessage("| Menu Emprunt : 4                                       |");            
             EntreesSorties.afficherMessage("| Quitter : 0                                            |");
             EntreesSorties.afficherMessage(" ========================================================");
             menu = EntreesSorties.lireEntier();
@@ -38,6 +39,10 @@ public class MenuBiblio {
                     this.menuExemplaire();
                     break;
                 }
+                case 4: {
+                    this.menuEmprunt();
+                    break;
+                }                
                 case 0:
                     break;
                 default: {
@@ -187,7 +192,8 @@ public void menuEmprunt() {
             EntreesSorties.afficherMessage("| Rendre un exemplaire : 2                               |");
             EntreesSorties.afficherMessage("| Consulter tous les emprunts : 3                        |");
             EntreesSorties.afficherMessage("| Consulter les emprunts d'un lecteur : 4                |");
-            EntreesSorties.afficherMessage("| Consulter les emprunts en retard pour relance : 5      |");            
+            EntreesSorties.afficherMessage("| Consulter les emprunts en retard pour relance : 5      |");
+            EntreesSorties.afficherMessage("| Retour Menu Principal : 0                              |");            
             EntreesSorties.afficherMessage(" ========================================================");
             menuLect = EntreesSorties.lireEntier();
 
