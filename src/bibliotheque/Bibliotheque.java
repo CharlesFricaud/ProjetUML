@@ -322,13 +322,13 @@ ________________________________________________________________________________
                                 dicoEmprunts.add(e);
                                 L.plusNbEmprunt();
                                 E.setEtat(EtatEmprunt.en_cours);
+                                EntreesSorties.afficherMessage("L'emprunt a été créé.");
                             }                          
                         }
                     }
                 }
             }
         }
-        EntreesSorties.afficherMessage("L'emprunt a été créé.");
     }
 
     public boolean cibleOK(CibleOuvrage co, CibleOuvrage cl) {
@@ -343,6 +343,9 @@ ________________________________________________________________________________
 
     public void consulterEmprunts() {
         for (Emprunt emprunt : dicoEmprunts) {
+            String isbn = emprunt.getIsbn();
+            Ouvrage o = getOuvrage(isbn);
+            System.out.println("");
             emprunt.afficherEmprunt();
         }
     }
@@ -396,7 +399,7 @@ ________________________________________________________________________________
                     EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
                 } else {
                     Emprunt e = getEmprunt(numLecteur, numExemplaire, isbn);
-                    if (e == null && e.getEtatEmprunt() != EtatEmprunt.disponible) {
+                    if (e == null && (e.getEtatEmprunt() == EtatEmprunt.disponible)) {
                         EntreesSorties.afficherMessage("Cet emprunt n'existe pas.");
                     } else {
                         dicoEmprunts.remove(e);
