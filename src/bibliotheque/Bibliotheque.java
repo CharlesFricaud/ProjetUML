@@ -281,6 +281,7 @@ ________________________________________________________________________________
     public void consulterExemplaires() {
         for (Map.Entry<String, Ouvrage> o : dicoOuvrage.entrySet()) {
             String isbn = o.getKey();
+            System.out.println("");
             o.getValue().getExemplaires(isbn);
         }
     }
@@ -294,38 +295,38 @@ ________________________________________________________________________________
         Lecteur L = getLecteur(numLecteur);
         if (L == null) {
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
-        }
-
-        String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage à emprunter : ");
-        Ouvrage O = getOuvrage(isbn);
-        if (O == null) {
-            EntreesSorties.afficherMessage("Ouvrage non présent dans le système.");
-        }
-
-        int numExemplaire = EntreesSorties.lireEntier("Entrez le numero de l'exemplaire à emprunter : ");
-        Exemplaire E = O.getExemplaire(numExemplaire);
-        if (E == null) {
-            EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
-        }
-
-        if (!E.isDisponible()) {
-            EntreesSorties.afficherMessage("Cet exemplaire est déjà en cours d'emprunt.");
-        }
-
-        CibleOuvrage co = O.getCible();
-        if (L.isLecteurSature() == true) {
-            EntreesSorties.afficherMessage("Ce lecteur a effectué tous ses emprunts possibles.");
-        }
-
-        CibleOuvrage cl = L.isLecteurOK();
-
-        if (!cibleOK(co, cl)) {
-            EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage.");
         } else {
-            Emprunt e = new Emprunt(numLecteur, numExemplaire, isbn);
-            dicoEmprunts.add(e);
-            L.plusNbEmprunt();
-            E.setEtat(EtatEmprunt.en_cours);
+            String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage à emprunter : ");
+            Ouvrage O = getOuvrage(isbn);
+            if (O == null) {
+                EntreesSorties.afficherMessage("Ouvrage non présent dans le système.");
+            } else {
+                int numExemplaire = EntreesSorties.lireEntier("Entrez le numero de l'exemplaire à emprunter : ");
+                Exemplaire E = O.getExemplaire(numExemplaire);
+                if (E == null) {
+                    EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
+                } else {
+                    if (!E.isDisponible()) {
+                        EntreesSorties.afficherMessage("Cet exemplaire est déjà en cours d'emprunt ou n'est pas empruntable.");
+                    } else {
+                        CibleOuvrage co = O.getCible();
+                        if (L.isLecteurSature() == true) {
+                            EntreesSorties.afficherMessage("Ce lecteur a effectué tous ses emprunts possibles.");
+                        } else {
+                            CibleOuvrage cl = L.isLecteurOK();
+
+                            if (!cibleOK(co, cl)) {
+                                EntreesSorties.afficherMessage("Ce lecteur ne correspond pas à la cible de l'ouvrage.");
+                            } else {
+                                Emprunt e = new Emprunt(numLecteur, numExemplaire, isbn);
+                                dicoEmprunts.add(e);
+                                L.plusNbEmprunt();
+                                E.setEtat(EtatEmprunt.en_cours);
+                            }                          
+                        }
+                    }
+                }
+            }
         }
         EntreesSorties.afficherMessage("L'emprunt a été créé.");
     }
@@ -351,14 +352,13 @@ ________________________________________________________________________________
         Lecteur L = getLecteur(numLecteur);
         if (L == null) {
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
-        }
-        else 
-        {
+        } else {
             for (Emprunt emprunt : dicoEmprunts) {
                 if (emprunt.getEmprunteur() == numLecteur) {
                     String isbn = emprunt.getIsbn();
                     Ouvrage o = getOuvrage(isbn);
-                    EntreesSorties.afficherMessage("Inforations de l'emprunt : ");
+                    System.out.println("");
+                    EntreesSorties.afficherMessage("Informations de l'emprunt : ");
                     EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
                     emprunt.afficherEmprunt();
                 }
@@ -384,27 +384,27 @@ ________________________________________________________________________________
         Lecteur L = getLecteur(numLecteur);
         if (L == null) {
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
-        }
-
-        String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage emprunté : ");
-        Ouvrage O = getOuvrage(isbn);
-        if (O == null) {
-            EntreesSorties.afficherMessage("Ouvrage non présent dans le système.");
-        }
-
-        int numExemplaire = EntreesSorties.lireEntier("Entrez le numero de l'exemplaire emprunté : ");
-        Exemplaire E = O.getExemplaire(numExemplaire);
-        if (E == null) {
-            EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
-        }
-
-        Emprunt e = getEmprunt(numLecteur, numExemplaire, isbn);
-        if (e == null && e.getEtatEmprunt() != EtatEmprunt.disponible) {
-            EntreesSorties.afficherMessage("Cet emprunt n'existe pas.");
         } else {
-            dicoEmprunts.remove(e);
-            L.moinsNbEmprunt();
-            E.setEtat(EtatEmprunt.disponible);
+            String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage emprunté : ");
+            Ouvrage O = getOuvrage(isbn);
+            if (O == null) {
+                EntreesSorties.afficherMessage("Ouvrage non présent dans le système.");
+            } else {
+                int numExemplaire = EntreesSorties.lireEntier("Entrez le numero de l'exemplaire emprunté : ");
+                Exemplaire E = O.getExemplaire(numExemplaire);
+                if (E == null) {
+                    EntreesSorties.afficherMessage("Cet exemplaire n'existe pas.");
+                } else {
+                    Emprunt e = getEmprunt(numLecteur, numExemplaire, isbn);
+                    if (e == null && e.getEtatEmprunt() != EtatEmprunt.disponible) {
+                        EntreesSorties.afficherMessage("Cet emprunt n'existe pas.");
+                    } else {
+                        dicoEmprunts.remove(e);
+                        L.moinsNbEmprunt();
+                        E.setEtat(EtatEmprunt.disponible);
+                    }
+                }
+            }
         }
     }
 
@@ -412,8 +412,7 @@ ________________________________________________________________________________
         int dureeEmprunt;
         for (Emprunt emprunt : dicoEmprunts) {
             dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
-            if(dureeEmprunt >= 15)
-            {
+            if (dureeEmprunt >= 15) {
                 emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
                 String isbn = emprunt.getIsbn();
                 Ouvrage o = getOuvrage(isbn);
@@ -428,4 +427,7 @@ ________________________________________________________________________________
         dicoEmprunts = _dicoEmprunts;
     }
 
+    public ArrayList<Emprunt> getEmprunts() {
+        return dicoEmprunts;
+    }
 }
