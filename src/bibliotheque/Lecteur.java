@@ -153,12 +153,12 @@ public class Lecteur implements Serializable {
         this.numTel = numTel;
     }
     
-    public void setNbEmprunt(){
+    public void plusNbEmprunt(){
         this.nbEmprunt++;
     }
 
+    public void moinsNbEmprunt(){
+        this.nbEmprunt--;
+    }    
+
 }
-
-
-
-
