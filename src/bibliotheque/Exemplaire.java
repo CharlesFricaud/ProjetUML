@@ -45,11 +45,16 @@ public class Exemplaire extends Ouvrage implements Serializable{
     public boolean getStatutEmprunt(){
         return statutEmprunt;
     }
+    
+    public EtatEmprunt getEtatEmprunt(){
+        return etat;
+    }
 
     public void afficherExemplaire() {
         System.out.println("Date reception : " + EntreesSorties.ecrireDate(this.getDateReception()));
         System.out.println("Numero d'exemplaire : "+ this.getNumExemplaire());
         System.out.println("Statut d'emprunt de cet exemplaire : " + this.getStatutEmprunt()+" (true = empruntable | false = seulement consultable)");
+        System.out.println("Etat d'emprunt de cet exemplaire : " + this.getEtatEmprunt());        
         EntreesSorties.afficherMessage("");
     }
     
