@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -48,7 +49,8 @@ public class DonneesUtilitaire {
             oos = new ObjectOutputStream(fos);
 
             oos.writeObject(ff.getLecteurs());
-            oos.writeObject(ff.getOuvrages());         
+            oos.writeObject(ff.getOuvrages()); 
+            oos.writeObject(ff.getEmprunts());
         } catch (Exception e) {
             System.out.println("SAVE" + e);
             success = false;
@@ -91,6 +93,7 @@ public class DonneesUtilitaire {
 
                 ff.creerLecteurs((HashMap<Integer, Lecteur>) ois.readObject());
                 ff.creerOuvrages((HashMap<String, Ouvrage>) ois.readObject());
+                ff.creerEmprunts((ArrayList<Emprunt>) ois.readObject());
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("LOAD" + e);
