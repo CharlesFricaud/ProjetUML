@@ -46,7 +46,7 @@ public class Emprunt implements Serializable {
         return emprunteur;
     }   
     
-    public int getExemplaire() {
+    public int getNumExemplaire() {
         return exemplaire;
     }
     
@@ -73,7 +73,7 @@ public class Emprunt implements Serializable {
     public void afficherEmprunt() {
         System.out.println("Numero d'emprunteur : " + this.getEmprunteur());
         System.out.println("Isbn de l'ouvrage emprunté : " + this.getIsbn());
-        System.out.println("Numero d'exemplair emprunté : " + this.getExemplaire());
+        System.out.println("Numero d'exemplair emprunté : " + this.getNumExemplaire());
         System.out.println("Date d'emprunt : "+this.getDateEmprunt());
         System.out.println("Date de retour  : " + this.getDateRetour());
         System.out.println("Etat de l'emprunt  : " + this.getEtatEmprunt());        
