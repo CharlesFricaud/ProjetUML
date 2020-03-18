@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class Emprunt implements Serializable {
     
-    private static final long serialVersionUID = 1500L;
+    private static final long serialVersionUID = -2198144180851370130L;
     
     // -----------------------------------------------
     //Attributs
