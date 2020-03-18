@@ -59,7 +59,7 @@ public class Exemplaire extends Ouvrage implements Serializable{
     }
     
     public boolean isDisponible(){
-        if(etat == EtatEmprunt.disponible && this.statutEmprunt != false){
+        if(etat == EtatEmprunt.disponible && this.statutEmprunt == true){
             return true;
         }
         else {
