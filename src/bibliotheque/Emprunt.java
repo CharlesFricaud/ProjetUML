@@ -79,6 +79,8 @@ public class Emprunt implements Serializable {
         System.out.println("Etat de l'emprunt  : " + this.getEtatEmprunt());        
         EntreesSorties.afficherMessage("");
     }
-    
-    
+      
+    public void setEtatEmprunt(EtatEmprunt etat){
+        this.etat = etat;
+    }
 }
