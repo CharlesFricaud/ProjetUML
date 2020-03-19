@@ -264,10 +264,9 @@ ________________________________________________________________________________
     public void consulterExemplairesOuvrage() {
         String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage :");
         Ouvrage O = getOuvrage(isbn);
-        if (O==null){
+        if (O == null) {
             EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
-        }
-        else if ((O != null) && (O.exemplaires != null)) {
+        } else if ((O != null) && (O.exemplaires != null)) {
             O.afficherReduit();
             for (Map.Entry<Integer, Exemplaire> e : O.exemplaires.entrySet()) {
                 e.getValue().afficherExemplaire();
@@ -351,9 +350,12 @@ ________________________________________________________________________________
                 emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
             }
 
-            String isbn = emprunt.getIsbn();
-            Ouvrage o = getOuvrage(isbn);
+            Ouvrage o = getOuvrage(emprunt.getIsbn());
+            Lecteur l = getLecteur(emprunt.getNumLecteur());
             System.out.println("");
+            EntreesSorties.afficherMessage("Inforations sur l'emprunt : ");
+            EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
+            EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
             emprunt.afficherEmprunt();
         }
     }
@@ -361,8 +363,8 @@ ________________________________________________________________________________
     public void consulterEmpruntsLecteur() {
         int dureeEmprunt;
         int numLecteur = EntreesSorties.lireEntier("Entrez le numero du lecteur à consulter : ");
-        Lecteur L = getLecteur(numLecteur);
-        if (L == null) {
+        Lecteur l = getLecteur(numLecteur);
+        if (l == null) {
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
         } else {
             for (Emprunt emprunt : dicoEmprunts) {
@@ -380,6 +382,7 @@ ________________________________________________________________________________
                     System.out.println("");
                     EntreesSorties.afficherMessage("Informations de l'emprunt : ");
                     EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
+                    EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
                     emprunt.afficherEmprunt();
                 }
             }
@@ -429,8 +432,10 @@ ________________________________________________________________________________
                 emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
                 String isbn = emprunt.getIsbn();
                 Ouvrage o = getOuvrage(isbn);
-                EntreesSorties.afficherMessage("Inforations sur l'emprunt en retard : ");
+                Lecteur l = getLecteur(emprunt.getNumLecteur());
+                EntreesSorties.afficherMessage("Inforations sur l'emprunt : ");
                 EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
+                EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
                 emprunt.afficherEmprunt();
             }
         }
