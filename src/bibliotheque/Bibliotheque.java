@@ -264,17 +264,16 @@ ________________________________________________________________________________
     public void consulterExemplairesOuvrage() {
         String isbn = EntreesSorties.lireChaine("Entrez le numero ISBN de l'ouvrage :");
         Ouvrage O = getOuvrage(isbn);
-        if ((O != null) && (O.exemplaires != null)) {
+        if (O==null){
+            EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
+        }
+        else if ((O != null) && (O.exemplaires != null)) {
             O.afficherReduit();
             for (Map.Entry<Integer, Exemplaire> e : O.exemplaires.entrySet()) {
                 e.getValue().afficherExemplaire();
             }
         } else if (O.exemplaires == null) {
             EntreesSorties.afficherMessage("Cet ouvrage n'a pas d'exemplaires.");
-
-        } else {
-            EntreesSorties.afficherMessage("Cet ouvrage n'existe pas.");
-
         }
     }
 
@@ -343,10 +342,15 @@ ________________________________________________________________________________
     public void consulterEmprunts() {
         int dureeEmprunt;
         for (Emprunt emprunt : dicoEmprunts) {
-            dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
-            if (dureeEmprunt >= 15) {
+            GregorianCalendar DateAct = new GregorianCalendar();
+            dureeEmprunt = DateAct.get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK);
+            if (dureeEmprunt >= 1) {
                 emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
             }
+            if (dureeEmprunt >= 7) {
+                emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
+            }
+
             String isbn = emprunt.getIsbn();
             Ouvrage o = getOuvrage(isbn);
             System.out.println("");
@@ -367,8 +371,11 @@ ________________________________________________________________________________
                     Ouvrage o = getOuvrage(isbn);
                     GregorianCalendar DateAct = new GregorianCalendar();
                     dureeEmprunt = DateAct.get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK);
-                    if (dureeEmprunt >= 15) {
+                    if (dureeEmprunt >= 1) {
                         emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
+                    }
+                    if (dureeEmprunt >= 7) {
+                        emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
                     }
                     System.out.println("");
                     EntreesSorties.afficherMessage("Informations de l'emprunt : ");
@@ -398,7 +405,7 @@ ________________________________________________________________________________
                     Emprunt e = null;
                     for (int i = 0; i < dicoEmprunts.size(); i++) {
                         Emprunt ec = dicoEmprunts.get(i);
-                        if ((int)ec.getNumLecteur() == (int) numLecteur && (int) ec.getNumExemplaire() == (int) numExemplaire && (ec.getIsbn().equals(isbn))==true){
+                        if ((int) ec.getNumLecteur() == (int) numLecteur && (int) ec.getNumExemplaire() == (int) numExemplaire && (ec.getIsbn().equals(isbn)) == true) {
                             e = ec;
                         }
                     }
