@@ -354,8 +354,8 @@ ________________________________________________________________________________
             Lecteur l = getLecteur(emprunt.getNumLecteur());
             System.out.println("");
             EntreesSorties.afficherMessage("Inforations sur l'emprunt : ");
-            EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
             EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
+            EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
             emprunt.afficherEmprunt();
         }
     }
@@ -367,6 +367,7 @@ ________________________________________________________________________________
         if (l == null) {
             EntreesSorties.afficherMessage("La fiche de ce lecteur n'existe pas.");
         } else {
+            EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
             for (Emprunt emprunt : dicoEmprunts) {
                 if (emprunt.getNumLecteur() == numLecteur) {
                     String isbn = emprunt.getIsbn();
@@ -382,7 +383,6 @@ ________________________________________________________________________________
                     System.out.println("");
                     EntreesSorties.afficherMessage("Informations de l'emprunt : ");
                     EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
-                    EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
                     emprunt.afficherEmprunt();
                 }
             }
@@ -427,9 +427,10 @@ ________________________________________________________________________________
     public void relancerLecteur() {
         int dureeEmprunt;
         for (Emprunt emprunt : dicoEmprunts) {
-            dureeEmprunt = emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateEmprunt().get(GregorianCalendar.DAY_OF_WEEK);
+            GregorianCalendar DateAct = new GregorianCalendar();
+            dureeEmprunt = DateAct.get(GregorianCalendar.DAY_OF_WEEK) - emprunt.getDateRetour().get(GregorianCalendar.DAY_OF_WEEK);
             if (dureeEmprunt >= 15) {
-                emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
+                emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
                 String isbn = emprunt.getIsbn();
                 Ouvrage o = getOuvrage(isbn);
                 Lecteur l = getLecteur(emprunt.getNumLecteur());
