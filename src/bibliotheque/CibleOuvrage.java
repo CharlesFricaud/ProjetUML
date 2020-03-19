@@ -13,5 +13,5 @@ public enum CibleOuvrage{
     enfant,
     adolescent,
     adulte,
-    adefinir;
+    a_definir;
 }
