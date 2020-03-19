@@ -167,7 +167,7 @@ ________________________________________________________________________________
 
             String nomsAuteurs = EntreesSorties.lireChaine("Entrez le(s) nom(s) de(s) auteur(s) : ");
             Integer sCible = 0;
-            CibleOuvrage cible = CibleOuvrage.adefinir;
+            CibleOuvrage cible = CibleOuvrage.a_definir;
 
             while (sCible != 1 && sCible != 2 && sCible != 3) {
                 sCible = EntreesSorties.lireEntier("Entrez la cible de l'ouvrage (1 pour enfant; 2 pour adolescent; 3 pour adulte) : ");
