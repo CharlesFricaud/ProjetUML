@@ -347,7 +347,7 @@ ________________________________________________________________________________
             if (dureeEmprunt >= 1) {
                 emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
             }
-            if (dureeEmprunt >= 7) {
+            if (dureeEmprunt >= 15) {
                 emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
             }
 
@@ -374,7 +374,7 @@ ________________________________________________________________________________
                     if (dureeEmprunt >= 1) {
                         emprunt.setEtatEmprunt(EtatEmprunt.en_retard);
                     }
-                    if (dureeEmprunt >= 7) {
+                    if (dureeEmprunt >= 15) {
                         emprunt.setEtatEmprunt(EtatEmprunt.a_relancer);
                     }
                     System.out.println("");
