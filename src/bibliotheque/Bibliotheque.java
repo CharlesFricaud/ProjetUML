@@ -353,7 +353,7 @@ ________________________________________________________________________________
             Ouvrage o = getOuvrage(emprunt.getIsbn());
             Lecteur l = getLecteur(emprunt.getNumLecteur());
             System.out.println("");
-            EntreesSorties.afficherMessage("Inforations sur l'emprunt : ");
+            EntreesSorties.afficherMessage("Informations sur l'emprunt : ");
             EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
             EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
             emprunt.afficherEmprunt();
@@ -434,7 +434,7 @@ ________________________________________________________________________________
                 String isbn = emprunt.getIsbn();
                 Ouvrage o = getOuvrage(isbn);
                 Lecteur l = getLecteur(emprunt.getNumLecteur());
-                EntreesSorties.afficherMessage("Inforations sur l'emprunt : ");
+                EntreesSorties.afficherMessage("Informations sur l'emprunt : ");
                 EntreesSorties.afficherMessage("Titre de l'ouvrage : " + o.getTitre());
                 EntreesSorties.afficherMessage("Nom et Prénom de l'emprunteur : " + l.getNom() + " " + l.getPrenom());
                 emprunt.afficherEmprunt();

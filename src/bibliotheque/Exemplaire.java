@@ -12,11 +12,11 @@ import java.util.GregorianCalendar;
  *
  * @author fricaudc
  */
-public class Exemplaire extends Ouvrage implements Serializable{
+public class Exemplaire extends Ouvrage{
     // -----------------------------------------------
-    //Attributs    private static final long serialVersionUID = 600L;
+    //Attributs
     // -----------------------------------------------
-    private static final long serialVersionUID = 800L;
+
     private GregorianCalendar dateReception;
     private int numExemplaire;
     private boolean statutEmprunt;
